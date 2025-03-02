@@ -1,0 +1,76 @@
+spring:
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true
+    open-in-view: false
+    generate-ddl: true
+    show-sql: true
+
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
+      password: ${REDIS_PASSWORD}
+
+oauth:
+  apple:
+    iss: ${OAUTH_APPLE_ISS}
+  kakao:
+    iss: ${OAUTH_KAKAO_ISS}
+    client-id: ${OAUTH_KAKAO_CLIENT_ID}
+
+jwt:
+  secret: ${JWT_SECRET}
+
+cloud:
+  aws:
+    credentials:
+      access-key: ${AWS_ACCESS_KEY}
+      secret-key: ${AWS_SECRET_KEY}
+    region:
+      static: ${AWS_REGION}
+    s3:
+      bucket: ${AWS_S3_BUCKET}
+    stack:
+      auto: false
+
+firebase:
+  key:
+    path: ${FIREBASE_KEY_PATH}
+
+logging:
+  level:
+    org.springframework.web: DEBUG
+
+management:
+  endpoint:
+    health:
+      show-details: never
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  show-actuator: false
+
+scheduling:
+  todoCron: ${TODO_CRON}  # 할 일 상태 업데이트 스케줄
+  deadlineNotificationCron: ${DEADLINE_NOTIFICATION_CRON}  # 마감일 알림 스케줄
+  fcmCleanupCron: ${FCM_CLEANUP_CRON}  # 비활성 FCM 토큰 삭제 스케줄

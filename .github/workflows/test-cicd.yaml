@@ -34,6 +34,10 @@ jobs:
     environment: test
     runs-on: ubuntu-latest
     steps:
+      # ✅ 환경 변수 추가 (SPRING_PROFILES_ACTIVE=test)
+      - name: 🌎 Set environment variables
+        run: echo "SPRING_PROFILES_ACTIVE=test" >> $GITHUB_ENV
+
       # 1. GitHub 리포지토리에서 코드 체크아웃
       - name: ✅ 브랜치 체크아웃
         uses: actions/checkout@v3
